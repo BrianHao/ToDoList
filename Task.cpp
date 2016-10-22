@@ -48,13 +48,14 @@ void ShoppingTask::print() {
     cout << "(" << deadline << day << "from now) [Shopping] " << description << endl;
 }
 
+// Detailed output for Shopping Tasks.
 void ShoppingTask::printDetailed() {
     print();
-    cout << "ITEMS TO PURCHASE:" << endl;
+    cout << "\tITEMS TO PURCHASE:" << endl;
     // Iterates over shopping list
     if (shoppingList.size() > 0) {
         for (int i = 0; i < shoppingList.size(); i++) {
-            cout << shoppingList[i] << endl;
+            cout << "\t" << shoppingList[i] << endl;
         }
     }
 }
@@ -80,14 +81,15 @@ void EventTask::print() {
     cout << "(" << deadline << day << "from now) [Event] " << description << endl;
 }
 
+// Detailed output for Shopping Tasks.
 void EventTask::printDetailed() {
     print();
-    cout << "WHERE: " << location << endl << "WHEN: " << time << endl;
+    cout << "\tWHERE: " << location << endl << "\tWHEN: " << time << endl;
 }
 
 // Save format for Event Tasks.
 string EventTask::saveFormat() {
-    string save = "G|" + to_string(deadline) + "|" + description + "|" + location + "|" + time;
+    string save = "E|" + to_string(deadline) + "|" + description + "|" + location + "|" + time;
     return save;
 }
 
@@ -101,16 +103,16 @@ void HomeworkTask::print() {
     cout << "(" << deadline << day << "from now) [Homework] " << description << endl;
 }
 
+// Detailed output for Shopping Tasks.
 void HomeworkTask::printDetailed() {
     print();
-    cout << "SUBJECT: " << subject << endl;
+    cout << "\tSUBJECT: " << subject << endl;
 }
 
 // Save format for Homework Tasks.
 string HomeworkTask::saveFormat() {
-    string save = "G|" + to_string(deadline) + "|" + description + "|" + subject;
+    string save = "H|" + to_string(deadline) + "|" + description + "|" + subject;
     return save;
 }
-
 
 #endif

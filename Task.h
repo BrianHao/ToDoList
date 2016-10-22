@@ -28,8 +28,8 @@ using namespace std;
 class Task {
 public:
     // Constructor and Destructor
-    Task();
-    virtual ~Task();
+    Task() {};
+    virtual ~Task() {};
     
     // Setters and Getters
     void setDeadline(int inDeadline) { deadline = inDeadline; };
@@ -42,6 +42,19 @@ public:
     virtual void printDetailed() { print(); };
     virtual string saveFormat();
     
+    // Overloaded operator
+    // A Task is "less than" another task if it's deadline is sooner
+    friend bool operator<(Task& leftTask, Task& rightTask) { return leftTask.getDeadline() < rightTask.getDeadline(); };
+    
+    // Comparator
+    // Returns the comparison of two task pointers.
+    struct TaskPtrComparator
+    {
+        bool operator()(Task* leftTask, Task* rightTask)
+        {
+            return (*leftTask) < (*rightTask);
+        }
+    };
     
 protected:
     // Task variables, used for all types of Tasks
@@ -55,8 +68,8 @@ protected:
 class ShoppingTask: public Task {
 public:
     // Constructor and Destructor
-    ShoppingTask();
-    virtual ~ShoppingTask();
+    ShoppingTask() {};
+    virtual ~ShoppingTask() {};
     
     // Functions relating to the shopping list
     void addItem(string newItem) { shoppingList.push_back(newItem); };
@@ -78,8 +91,8 @@ protected:
 class EventTask: public Task {
 public:
     // Constructor and Destructor
-    EventTask();
-    virtual ~EventTask();
+    EventTask() {};
+    virtual ~EventTask() {};
     
     // Setters and Getters
     void setLocation(string inLocation) { location = inLocation; };
@@ -104,8 +117,8 @@ protected:
 class HomeworkTask: public Task {
 public:
     // Constructor and Destructor
-    HomeworkTask();
-    virtual ~HomeworkTask();
+    HomeworkTask() {};
+    virtual ~HomeworkTask() {};
     
     // Setters and Getters
     void setSubject(string inSubject) { subject = inSubject; };
