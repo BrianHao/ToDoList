@@ -1,6 +1,6 @@
-/****************/
-/** TASK CLASS **/
-/****************/
+/**********/
+/** TASK **/
+/**********/
 /*
  =SUPERCLASS=
  This class implements a Task item. The default task is a Generic Task, which contains
@@ -13,6 +13,15 @@
  Finally, a Homework Task has a class subject associated with it. In additional to their
  class-exclusive parameters, they contain overridden functions that allow them to provide
  data about themselves
+ 
+ =FUNTIONS=
+ Functions for each Task Type include:
+    > Getter and Setter for Deadline
+    > Getter and Setter for Description
+    > Print the task
+    > Print the task in detailed format, including task-specific information
+    > Return a string of the task in the Save Format
+        (Example: "E|7|Picnic|Central Park|11 AM")
  */
 
 #ifndef TASK_H
@@ -28,7 +37,7 @@ using namespace std;
 class Task {
 public:
     // Constructor and Destructor
-    Task() {};
+    Task(unsigned int inDeadline = 1, string inDesc = "") : deadline(inDeadline), description(inDesc) {};
     virtual ~Task() {};
     
     // Setters and Getters
@@ -40,7 +49,7 @@ public:
     // Virtual functions to access task information
     virtual void print();
     virtual void printDetailed() { print(); };
-    virtual string saveFormat();
+    virtual string toSaveFormat();
     
     // Overloaded operator
     // A Task is "less than" another task if it's deadline is sooner
@@ -68,7 +77,7 @@ protected:
 class ShoppingTask: public Task {
 public:
     // Constructor and Destructor
-    ShoppingTask() {};
+    ShoppingTask(unsigned int inDeadline = 1, string inDesc = "") : Task(inDeadline, inDesc) {};
     virtual ~ShoppingTask() {};
     
     // Functions relating to the shopping list
@@ -78,7 +87,7 @@ public:
     // Virtual functions to access task information
     virtual void print();
     virtual void printDetailed();
-    virtual string saveFormat();
+    virtual string toSaveFormat();
     
 protected:
     // ShoppingTask-specific variable
@@ -91,7 +100,7 @@ protected:
 class EventTask: public Task {
 public:
     // Constructor and Destructor
-    EventTask() {};
+    EventTask(unsigned int inDeadline = 1, string inDesc = "") : Task(inDeadline, inDesc) {};
     virtual ~EventTask() {};
     
     // Setters and Getters
@@ -103,7 +112,7 @@ public:
     // Virtual functions to access task information
     virtual void print();
     virtual void printDetailed();
-    virtual string saveFormat();
+    virtual string toSaveFormat();
     
 protected:
     // EventTask-specific variables
@@ -117,7 +126,7 @@ protected:
 class HomeworkTask: public Task {
 public:
     // Constructor and Destructor
-    HomeworkTask() {};
+    HomeworkTask(unsigned int inDeadline = 1, string inDesc = "") : Task(inDeadline, inDesc) {};
     virtual ~HomeworkTask() {};
     
     // Setters and Getters
@@ -127,7 +136,7 @@ public:
     // Virtual functions to access task information
     virtual void print();
     virtual void printDetailed();
-    virtual string saveFormat();
+    virtual string toSaveFormat();
 
 protected:
     //HomeworkTask-specific variable

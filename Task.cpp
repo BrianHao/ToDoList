@@ -1,6 +1,6 @@
-/****************/
-/** TASK CLASS **/
-/****************/
+/**********/
+/** TASK **/
+/**********/
 /*
  =SUPERCLASS=
  This class implements a Task item. The default task is a Generic Task, which contains
@@ -13,6 +13,15 @@
  Finally, a Homework Task has a class subject associated with it. In additional to their
  class-exclusive parameters, they contain overridden functions that allow them to provide
  data about themselves
+ 
+ =FUNTIONS=
+ Functions for each Task Type include:
+    > Getter and Setter for Deadline
+    > Getter and Setter for Description
+    > Print the task
+    > Print the task in detailed format, including task-specific information
+    > Return a string of the task in the Save Format
+        (Example: "E|7|Picnic|Central Park|11 AM")
  */
 
 #ifndef TASK_CPP
@@ -24,9 +33,11 @@
 #include <vector>
 using namespace std;
 
-/******************/
-/** Generic Task **/
-/******************/
+const string DELIM = "|";
+
+    /******************/
+    /** Generic Task **/
+    /******************/
 // Simple output for Generic Tasks.
 void Task::print() {
     string day = (deadline > 1) ? " days " : " day ";
@@ -34,14 +45,14 @@ void Task::print() {
 }
 
 // Save format for Generic Tasks.
-string Task::saveFormat() {
-    string save = "G|" + to_string(deadline) + "|" + description;
+string Task::toSaveFormat() {
+    string save = "G" + DELIM + to_string(deadline) + DELIM + description;
     return save;
 }
 
-/*******************/
-/** Shopping Task **/
-/*******************/
+    /*******************/
+    /** Shopping Task **/
+    /*******************/
 // Simple output for Shopping Tasks.
 void ShoppingTask::print() {
     string day = (deadline > 1) ? " days " : " day ";
@@ -61,20 +72,20 @@ void ShoppingTask::printDetailed() {
 }
 
 // Save format for Shopping Tasks.
-string ShoppingTask::saveFormat() {
-    string save = "S|" + to_string(deadline) + "|" + description;
+string ShoppingTask::toSaveFormat() {
+    string save = "S" + DELIM + to_string(deadline) + DELIM + description;
     // Iterates over shopping list
     if (shoppingList.size() > 0) {
         for (int i = 0; i < shoppingList.size(); i++) {
-            save += "|" + shoppingList[i];
+            save += DELIM + shoppingList[i];
         }
     }
     return save;
 }
 
-/****************/
-/** Event Task **/
-/****************/
+    /****************/
+    /** Event Task **/
+    /****************/
 // Simple output for Event Tasks.
 void EventTask::print() {
     string day = (deadline > 1) ? " days " : " day ";
@@ -88,15 +99,15 @@ void EventTask::printDetailed() {
 }
 
 // Save format for Event Tasks.
-string EventTask::saveFormat() {
-    string save = "E|" + to_string(deadline) + "|" + description + "|" + location + "|" + time;
+string EventTask::toSaveFormat() {
+    string save = "E" + DELIM + to_string(deadline) + DELIM + description + DELIM + location + DELIM + time;
     return save;
 }
 
 
-/*******************/
-/** Homework Task **/
-/*******************/
+    /*******************/
+    /** Homework Task **/
+    /*******************/
 // Simple output for Homework Tasks.
 void HomeworkTask::print() {
     string day = (deadline > 1) ? " days " : " day ";
@@ -110,8 +121,8 @@ void HomeworkTask::printDetailed() {
 }
 
 // Save format for Homework Tasks.
-string HomeworkTask::saveFormat() {
-    string save = "H|" + to_string(deadline) + "|" + description + "|" + subject;
+string HomeworkTask::toSaveFormat() {
+    string save = "H" + DELIM + to_string(deadline) + DELIM + description + DELIM + subject;
     return save;
 }
 
