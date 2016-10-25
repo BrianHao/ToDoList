@@ -16,12 +16,13 @@ void SortedVector<T, Comparator>::display() const
     std::cout << vec[size()-1] << std::endl;
 }
 
+// Altered insert function to also return position inserted into.
 template<class T, class Comparator>
-void SortedVector<T, Comparator>::insert(const T& data)
+int SortedVector<T, Comparator>::insert(const T& data)
 {
     if (empty()) {
         vec.push_back(data);
-        return;
+        return 0;
     }
     
     // Temporary use of O(n) search algorithm to handle lower_bound issues
@@ -38,6 +39,7 @@ void SortedVector<T, Comparator>::insert(const T& data)
     }
     
     vec.insert(vec.begin()+index, data);
+    return index;
 }
 
 template<class T, class Comparator>

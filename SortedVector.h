@@ -43,7 +43,8 @@ public:
     void clear() { vec.clear(); }
     void display() const;
     
-    void insert(const T& data);
+    // Altered insert function to also return position inserted into.
+    int insert(const T& data);
     T& remove(unsigned int pos) { auto it = vec.begin(); std::advance(it,pos); T& data = *it; vec.erase(it); return data; }
     
     std::vector<T> toVector() const;
