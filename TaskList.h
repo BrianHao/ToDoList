@@ -16,6 +16,7 @@
 #include "Task.h"
 #include <string>
 #include <vector>
+#include <memory>
 using namespace std;
 
 class TaskList {
@@ -25,11 +26,9 @@ public:
     virtual ~TaskList() {};
     
     // Functions to interact with the list of tasks
-    unsigned int addTask(Task* inTask) { return taskList.insert(inTask); };
-    unsigned int addTask(const string &saveString);
-    string removeTask(unsigned int pos);
-    Task taskAt(unsigned int pos) { return *taskList.at(pos); };
-    Task* taskPtrAt(unsigned int pos) { return taskList.at(pos); };
+    unsigned int addTask(shared_ptr<Task> inTask) { return taskList.insert(inTask); };
+    void removeTask(unsigned int pos) { taskList.remove(pos); };
+    shared_ptr<Task> taskPtrAt(unsigned int pos) { return taskList.at(pos); };
     
     // Functions to output the list of tasks stored
     void printTaskList();
@@ -37,12 +36,12 @@ public:
     
     // Helper Functions
     bool empty() { return taskList.size() == 0; };
-    // Takes in a string in the Save Format and parses the contents into a vector of strings
-    vector<string> parseSaveFormat(const string saveString, char delim);
+    unsigned int size() { return taskList.size(); };
     
 private:    
     // Sorted Vector of task pointers
-    SortedVector<Task*, Task::TaskPtrComparator> taskList;
+    //SortedVector<Task*, Task::TaskPtrComparator> taskList;
+    SortedVector<shared_ptr<Task>, Task::TaskPtrComparator> taskList;
 };
 
 #endif
