@@ -27,12 +27,13 @@
 #ifndef TASK_CPP
 #define TASK_CPP
 
-#include "Task.h"
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Task.h"
 using namespace std;
 
+// Delimiter for separating tokens in the save format. Default is "|"
 const string DELIM = "|";
 
     /******************/
@@ -54,7 +55,7 @@ string Task::toSaveFormat() {
     /** Shopping Task **/
     /*******************/
 // Simple output for Shopping Tasks.
-void ShoppingTask::print() {
+ void ShoppingTask::print() {
     string day = (deadline > 1) ? " days " : " day ";
     cout << "(" << deadline << day << "from now) [Shopping] " << description << endl;
 }

@@ -59,9 +59,9 @@ public:
     // Returns the comparison of two task pointers.
     struct TaskPtrComparator
     {
-        bool operator()(Task* leftTask, Task* rightTask)
+        bool operator()(shared_ptr<Task> leftTask, shared_ptr<Task> rightTask)
         {
-            return (*leftTask) < (*rightTask);
+            return *leftTask < *rightTask;
         }
     };
     
