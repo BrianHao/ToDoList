@@ -24,6 +24,7 @@ class SortedVector {
 public:
     
     SortedVector() { vec.reserve(50); }
+    virtual ~SortedVector() {};
     
     // O(1) operations
     unsigned int capacity() const { return (unsigned int) vec.capacity(); }
@@ -44,7 +45,7 @@ public:
     void display() const;
     
     // Altered insert function to also return position inserted into.
-    int insert(const T& data);
+    unsigned int insert(const T& data);
     T& remove(unsigned int pos) { auto it = vec.begin(); std::advance(it,pos); T& data = *it; vec.erase(it); return data; }
     
     std::vector<T> toVector() const;

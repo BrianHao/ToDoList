@@ -18,7 +18,7 @@ void SortedVector<T, Comparator>::display() const
 
 // Altered insert function to also return position inserted into.
 template<class T, class Comparator>
-int SortedVector<T, Comparator>::insert(const T& data)
+unsigned int SortedVector<T, Comparator>::insert(const T& data)
 {
     if (empty()) {
         vec.push_back(data);
