@@ -2,10 +2,13 @@
 // and then call ToDoListApp.run()
 
 #include <iostream>
+#include "ToDoListApp.h"
 using namespace std;
 
 int main() {
-    // Create new instance of ToDoListApp
-    // Call ToDoListApp.run();
+    // Create a new instance of a ToDoListApp
+    ToDoListApp myToDoListApp;
+    // Run ToDoListApp
+    myToDoListApp.run();
     return 0;
 }
