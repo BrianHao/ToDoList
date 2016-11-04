@@ -104,8 +104,11 @@ any additional specialized task information. Generic tasks, shopping tasks, even
 tasks follow the formats, respectively:
 
 `G|4|Put away fans, bring out space heaters`
+
 `S|3|Shopping Day @ Manhattan Mall|Socks|3 Sweaters (Blue, Green & Red)|Dessert Boots`
+
 `E|5|Networking Event|Hudson Terrace|8:00PM`
+
 `H|6|Homework|AFPRL 100`
 
 ## Compilation Instructions
