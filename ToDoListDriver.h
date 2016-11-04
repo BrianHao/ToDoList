@@ -11,7 +11,10 @@
 
 #ifndef TODOLIST_DRIVER_H
 #define TODOLIST_DRIVER_H
+
+#include <memory>
 #include "TaskList.h"
+#include "Task.h"
 using namespace std;
 
 class ToDoListDriver {
@@ -21,10 +24,10 @@ public:
     virtual ~ToDoListDriver() {};
     
     // Functions to interact with the TaskLists
-    int addOutstandingTask(Task *inTask) { return outstandingTasks.addTask(inTask); };
-    int addOutstandingTask(string &inSaveString) { return outstandingTasks.addTask(inSaveString); };
-    string removeOutstandingTask(unsigned int pos) { return outstandingTasks.removeTask(pos); };
-    int completeOutstandingTask(unsigned int pos);
+    unsigned int addOutstandingTask(shared_ptr<Task> inTask) { return outstandingTasks.addTask(inTask); };
+    void removeOutstandingTask(unsigned int pos) { outstandingTasks.removeTask(pos); };
+    void removeCompletedTask(unsigned int pos) { completedTasks.removeTask(pos); };
+    unsigned int completeOutstandingTask(unsigned int pos);
     
     // Functions to output the list of tasks stored
     void printOutstandingTaskList() { outstandingTasks.printTaskList(); };
@@ -32,6 +35,12 @@ public:
     void printCompletedTaskList() { completedTasks.printTaskList(); };
     void printCompletedTaskListDetailed() { completedTasks.printTaskListDetailed(); };
     
+    // Helper Functions
+    bool outstandingTasksIsEmpty() { return outstandingTasks.empty(); };
+    bool completedTasksIsEmpty() { return completedTasks.empty(); };
+    shared_ptr<Task> outstandingTaskAt(unsigned int pos) { return outstandingTasks.taskPtrAt(pos); };
+    shared_ptr<Task> completedTaskAt(unsigned int pos) { return completedTasks.taskPtrAt(pos); };
+    int outstandingTaskListSize() { return outstandingTasks.size(); };
     
 private:
     // A TaskList that manages currently incomplete tasks.
