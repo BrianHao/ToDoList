@@ -7,6 +7,8 @@
  removing a specific task from the list, and outputting all of the tasks in the list.
  
  The data structure used is a SortedVector, allowing for tasks to be sorted by deadline.
+ The SortedVector holds a Shared Pointer of type Task, allowing for multiple pointers
+ to access the same task.
  */
 
 #ifndef TASKLIST_H
@@ -26,8 +28,11 @@ public:
     virtual ~TaskList() {};
     
     // Functions to interact with the list of tasks
+        // Inserts a task into the sorted task list, returning the position it was inserted into
     unsigned int addTask(shared_ptr<Task> inTask) { return taskList.insert(inTask); };
+        // Removes the task at the provided position from the sorted task list
     void removeTask(unsigned int pos) { taskList.remove(pos); };
+        // Returns the Task pointer held at the provided position in the SortedVector
     shared_ptr<Task> taskPtrAt(unsigned int pos) { return taskList.at(pos); };
     
     // Functions to output the list of tasks stored
@@ -39,8 +44,7 @@ public:
     unsigned int size() { return taskList.size(); };
     
 private:    
-    // Sorted Vector of task pointers
-    //SortedVector<Task*, Task::TaskPtrComparator> taskList;
+    // Sorted Vector of Shared Pointers of type Task
     SortedVector<shared_ptr<Task>, Task::TaskPtrComparator> taskList;
 };
 

@@ -2,7 +2,7 @@
 /** TASK **/
 /**********/
 /*
- =SUPERCLASS=
+ =BASE CLASS=
  This class implements a Task item. The default task is a Generic Task, which contains
  a description, as well as a deadline in the form of an integer representing days-until-due.
  It has functions to provide data about itself.
@@ -22,6 +22,11 @@
     > Print the task in detailed format, including task-specific information
     > Return a string of the task in the Save Format
         (Example: "E|7|Picnic|Central Park|11 AM")
+ 
+ =COMPARISON=
+ To allow for the comparison of two Tasks, the Less Than operator "<" is overloaded to compare
+ two tasks based on their deadlines. Furthermore, a compararator struct that uses this overloaded
+ operator will later be passed onto a SortedVector to allow sorting of Task pointers.
  */
 
 #ifndef TASK_H
@@ -29,6 +34,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 using namespace std;
 
     /******************/
@@ -53,14 +59,16 @@ public:
     
     // Overloaded operator
     // A Task is "less than" another task if it's deadline is sooner
-    friend bool operator<(Task& leftTask, Task& rightTask) { return leftTask.getDeadline() < rightTask.getDeadline(); };
+    friend bool operator<(Task& leftTask, Task& rightTask) {
+        if (leftTask.getDeadline() == rightTask.getDeadline()) {
+            return leftTask.getDescription() < rightTask.getDescription();
+        }
+        return leftTask.getDeadline() < rightTask.getDeadline(); };
     
     // Comparator
     // Returns the comparison of two task pointers.
-    struct TaskPtrComparator
-    {
-        bool operator()(shared_ptr<Task> leftTask, shared_ptr<Task> rightTask)
-        {
+    struct TaskPtrComparator {
+        bool operator()(shared_ptr<Task> leftTask, shared_ptr<Task> rightTask) {
             return *leftTask < *rightTask;
         }
     };

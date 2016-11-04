@@ -2,7 +2,7 @@
 /** TASK **/
 /**********/
 /*
- =SUPERCLASS=
+ =BASE CLASS=
  This class implements a Task item. The default task is a Generic Task, which contains
  a description, as well as a deadline in the form of an integer representing days-until-due.
  It has functions to provide data about itself.
@@ -22,6 +22,12 @@
     > Print the task in detailed format, including task-specific information
     > Return a string of the task in the Save Format
         (Example: "E|7|Picnic|Central Park|11 AM")
+ 
+ 
+ =COMPARISON=
+ To allow for the comparison of two Tasks, the Less Than operator "<" is overloaded to compare
+ two tasks based on their deadlines. Furthermore, a compararator struct that uses this overloaded
+ operator will later be passed onto a SortedVector to allow sorting of Task pointers.
  */
 
 #ifndef TASK_CPP
@@ -30,6 +36,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <memory>
 #include "Task.h"
 using namespace std;
 
@@ -64,9 +71,9 @@ string Task::toSaveFormat() {
 void ShoppingTask::printDetailed() {
     print();
     cout << "\tITEMS TO PURCHASE:" << endl;
-    // Iterates over shopping list
+    // Iterates over shopping list to print each item
     if (shoppingList.size() > 0) {
-        for (int i = 0; i < shoppingList.size(); i++) {
+        for (unsigned int i = 0; i < shoppingList.size(); i++) {
             cout << "\t" << shoppingList[i] << endl;
         }
     }
@@ -75,9 +82,9 @@ void ShoppingTask::printDetailed() {
 // Save format for Shopping Tasks.
 string ShoppingTask::toSaveFormat() {
     string save = "S" + DELIM + to_string(deadline) + DELIM + description;
-    // Iterates over shopping list
+    // Iterates over shopping list to add each item to the save format
     if (shoppingList.size() > 0) {
-        for (int i = 0; i < shoppingList.size(); i++) {
+        for (unsigned int i = 0; i < shoppingList.size(); i++) {
             save += DELIM + shoppingList[i];
         }
     }
