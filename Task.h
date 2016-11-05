@@ -59,11 +59,13 @@ public:
     
     // Overloaded operator
     // A Task is "less than" another task if it's deadline is sooner
+    // But if both tasks' deadlines are the same, their description is compared.
     friend bool operator<(Task& leftTask, Task& rightTask) {
         if (leftTask.getDeadline() == rightTask.getDeadline()) {
             return leftTask.getDescription() < rightTask.getDescription();
         }
-        return leftTask.getDeadline() < rightTask.getDeadline(); };
+        return leftTask.getDeadline() < rightTask.getDeadline();
+    };
     
     // Comparator
     // Returns the comparison of two task pointers.
