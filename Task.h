@@ -75,6 +75,8 @@ public:
         }
     };
     
+    
+    
 protected:
     // Task variables, used for all types of Tasks
     unsigned int deadline;
