@@ -1,11 +1,7 @@
-# Assignment 2 - To-Do List Application
+# To-Do List Application
 Brian Hao
 
-CSCI235
-
-
 This is a task-listing application that allows users to track of their daily tasks.
-
 
 ### Types of Tasks
 
