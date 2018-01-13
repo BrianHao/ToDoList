@@ -1,7 +1,7 @@
 # To-Do List Application
 Brian Hao
 
-This is a task-listing application that allows users to track of their daily tasks.
+A console task-management application that allows users to keep track of their daily tasks.
 
 ### Types of Tasks
 
